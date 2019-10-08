@@ -33,9 +33,38 @@ count = [0] * len(arr)
 
 
 def count_sort(arr, maximum=-1):
-    # Count the number of elements with distinct values
-    count_arr = [0] * len(arr)
+
+    # Find out the maximum element from the given array.
+    max_element = 0
+    for i in arr:
+        if i < 0:
+            return "Error, negative numbers not allowed in Count Sort"
+        if i > max_element:
+            max_element = i
+
+    # Initialize an array of length max+1 with all elements 0. This array is used for storing the count of the elements in the array.
+    count_arr = [0] * (max_element+1)
+
+    # Store the count of each element at their respective index in count array.
+    print(count_arr)
     for n in arr:
         count_arr[n] += 1
-    print(count_arr)
-    return arr
+
+    # Store cumulative sum of the elements of the count array.
+    for k in range(1, len(count_arr)):
+        count_arr[k] += count_arr[k-1]
+
+    # Find the index of each element of the original array in count array.
+    output_arr = [0] * len(arr)
+    b = len(arr) - 1
+
+    while b >= 0:
+        # Look at value of arr[b]
+        # Look at index equal to arr[b] in count_arr
+        # Place value of arr[b] in index of arr equal to count_arr[arr[b]]
+        # Subtract 1 from count_arr value for off by 1
+        output_arr[count_arr[arr[b]] - 1] = arr[b]
+        count_arr[arr[b]] -= 1
+        b -= 1
+
+    return output_arr
