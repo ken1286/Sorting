@@ -33,7 +33,7 @@ count = [0] * len(arr)
 
 
 def count_sort(arr, maximum=-1):
-
+    # steps used: https://www.programiz.com/dsa/counting-sort
     # Find out the maximum element from the given array.
     max_element = 0
     for i in arr:
